@@ -1,0 +1,61 @@
+/* ===== Plan as task manager ===== */
+#planSeg button i{font-style:normal;font-size:9px;margin-left:5px;opacity:.6}
+#planSeg button i:empty{display:none}
+.wcount{display:inline-grid;place-items:center;min-width:14px;height:14px;border-radius:7px;background:var(--ink);color:#fff;font-size:8px;padding:0 3px;vertical-align:1px}
+.wd.sel .wcount{background:var(--signal)}
+
+.tasks{list-style:none;display:flex;flex-direction:column;gap:8px}
+.t-head{font-size:8px;letter-spacing:.3em;font-weight:500;color:var(--graphite);padding:10px 0 2px;text-transform:uppercase}
+.t-head em{font-style:normal;letter-spacing:.1em;margin-left:6px;opacity:.7}
+.t-head.late-h{color:var(--signal)}
+.task{display:flex;align-items:center;gap:12px;background:var(--paper);box-shadow:var(--sh-card);border-radius:4px;padding:12px 10px 12px 12px;cursor:pointer;position:relative;transition:opacity .4s}
+.task:nth-child(even){margin-left:12px}
+.task:active{transform:scale(.99)}
+.tcheck{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #cfcfcb;flex:none;position:relative;transition:background .3s}
+.task.pri-2 .tcheck{box-shadow:inset 0 0 0 1.5px var(--signal)}
+.task.done .tcheck,.sub.done .tcheck{background:radial-gradient(circle at 35% 30%,#FFB07A,#F7813F 40%,#D9531A);box-shadow:none}
+.task.done .tcheck::after,.sub.done .tcheck::after{content:"";position:absolute;left:7px;top:4px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.tcheck.sm{width:18px;height:18px}
+.sub.done .tcheck.sm::after{left:5px;top:2px;width:4px;height:8px}
+.tbody{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.tt{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.task.done{opacity:.55}
+.task.done .tt{text-decoration:line-through;text-decoration-color:var(--graphite)}
+.tmeta{font-size:11px;color:var(--graphite);display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{display:inline-block;width:7px;height:7px;border-radius:50%;flex:none}
+.tchips{display:flex;gap:6px;align-items:center}
+.tchips:empty{display:none}
+.due{font-size:9px;letter-spacing:.04em;padding:2px 7px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--fog);color:var(--graphite)}
+.due.soon{box-shadow:inset 0 0 0 1px var(--ember);color:var(--ember)}
+.due.today{background:var(--ember);color:#fff;box-shadow:none}
+.due.late{background:var(--signal);color:#fff;box-shadow:none}
+.subc,.has-note{font-size:9px;color:var(--graphite)}
+.subc::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;box-shadow:inset 0 0 0 1px var(--graphite);margin-right:4px;vertical-align:-1px}
+.flag{width:8px;height:8px;border-radius:50%;background:var(--signal);flex:none}
+.flag.in{display:inline-block;width:7px;height:7px;margin-right:2px}
+.chev{width:14px;height:14px;color:#c4c4c0;flex:none}
+
+/* task sheet */
+.sh-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sh-micro{font-size:8px;letter-spacing:.3em;color:var(--ember);font-weight:500}
+.title-in{font-size:20px !important;font-weight:300 !important;background:none !important;box-shadow:none !important;padding:4px 0 !important;border-bottom:1px solid var(--fog) !important;border-radius:0 !important}
+.field textarea{border:0;outline:none;background:var(--paper);box-shadow:var(--sh-in);border-radius:4px;padding:10px 12px;font:400 14px/1.4 Roboto,sans-serif;color:var(--ink);resize:none;width:100%}
+.field textarea:focus{box-shadow:var(--sh-in),0 0 0 2px var(--ember)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.f-grid .field{min-width:0}
+.f-grid input{min-width:0;font-size:14px;padding:10px}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin:-4px 0 14px}
+.quick button{font-size:11px;padding:6px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--fog);color:var(--graphite)}
+.quick button:active{background:var(--ink);color:#fff}
+.chip .tag{margin-right:2px}
+.subs{list-style:none;display:flex;flex-direction:column}
+.sub{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--fog);font-size:13px;cursor:pointer}
+.sub span{flex:1;min-width:0}
+.sub.done span{text-decoration:line-through;color:var(--graphite)}
+.sx{width:24px;height:24px;display:grid;place-items:center;color:#b5b5b2}
+.sx svg{width:12px;height:12px}
+.sub-add{display:flex;gap:8px;margin-top:8px}
+.sub-add input{flex:1}
+.sq-mini{width:42px;flex:none;border-radius:4px;background:var(--ink);color:#fff;display:grid;place-items:center}
+.sq-mini svg{width:14px;height:14px}
+.danger-t{color:var(--signal)}

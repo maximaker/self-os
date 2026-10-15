@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F4F4F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SELF.OS">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="SELF.OS — a calm instrument for mood, rituals, focus, plans, body, money and people.">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<title>SELF.OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="states.css">
+<link rel="stylesheet" href="modules.css">
+<link rel="stylesheet" href="plan.css">
+<link rel="stylesheet" href="polish.css">
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <radialGradient id="ember" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#FFB07A"/><stop offset=".35" stop-color="#F7813F"/><stop offset="1" stop-color="#D9531A"/></radialGradient>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .05 0"/></filter>
+  </defs>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 7 4 12l5 5M4 12h9a7 7 0 0 1 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-skip" viewBox="0 0 24 24"><path d="M6 6l9 6-9 6zM18 6v12" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z" fill="currentColor"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a7 7 0 0 0 10 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-step" viewBox="0 0 24 24"><path d="M7 16c-2 0-3-2-3-5s1-6 3-6 3 3 3 6-1 5-3 5zm10 3c-2 0-3-2-3-5s1-6 3-6 3 3 3 6-1 5-3 5z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z" fill="currentColor"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 12.5a9 9 0 0 1 12 0M9 16a4 4 0 0 1 6 0M12 19.5h.01" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="stage">
+<main class="device" id="device">
+  <div class="grain"></div>
+
+  <!-- ============ HOME ============ -->
+  <section class="screen is-active" data-screen="home">
+    <div class="ghost">SELF.OS</div>
+    <div class="topbar">
+      <button class="avatar" data-go="profile" aria-label="Profile"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop" alt=""></button>
+      <button class="bell" data-go="inbox" aria-label="Notifications"><svg><use href="#i-bell"/></svg><i class="badge" id="bellBadge">3</i></button>
+    </div>
+    <div class="offline" id="offline"><svg><use href="#i-wifi"/></svg>Offline · changes saved on device</div>
+    <header class="capsule">
+      <span class="cap-sub">Wednesday · Oct 14</span>
+      <span class="cap-title">Good morning, Max</span>
+    </header>
+    <div class="home-hero">
+      <div class="ring-disc">
+        <svg viewBox="0 0 200 200" class="ring">
+          <circle cx="100" cy="100" r="86" class="ring-track"/>
+          <circle cx="100" cy="100" r="86" class="ring-fill" id="dayRing"/>
+        </svg>
+        <div class="orb"></div>
+      </div>
+      <div class="home-stat">
+        <div class="display"><span id="dayPct">0</span><small>%</small></div>
+        <div class="meta">of today's intentions met</div>
+      </div>
+    </div>
+    <nav class="tiles stair">
+      <button class="tile" data-go="today"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="11" fill="url(#ember)"/></svg><span>Today</span><em>Mood · Energy</em></button>
+      <button class="tile" data-go="habits"><svg viewBox="0 0 40 40"><g fill="#2E8BA6"><rect x="8" y="22" width="5" height="10" rx="2"/><rect x="17" y="14" width="5" height="18" rx="2"/><rect x="26" y="8" width="5" height="24" rx="2"/></g></svg><span>Habits</span><em>4 of 6</em></button>
+      <button class="tile" data-go="focus"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="#262626"/><circle cx="20" cy="20" r="4" fill="#2E8BA6"/></svg><span>Focus</span><em>2h 10m</em></button>
+      <button class="tile" data-go="plan"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="#E63B2E"/><text x="20" y="26" text-anchor="middle" font-size="13" font-family="Roboto" fill="#fff">14</text></svg><span>Plan</span><em>3 events</em></button>
+      <button class="tile" data-go="journal"><svg viewBox="0 0 40 40"><rect x="10" y="8" width="20" height="24" rx="2" fill="#fff" stroke="#262626" stroke-width="1.5"/><path d="M14 15h12M14 20h12M14 25h7" stroke="#262626" stroke-width="1.2"/><circle cx="29" cy="29" r="4" fill="#F26B2A"/></svg><span>Journal</span><em>Day 212</em></button>
+      <button class="tile" data-go="insights"><svg viewBox="0 0 40 40"><path d="M8 30 16 20l6 5 10-14" fill="none" stroke="#262626" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="11" r="4" fill="#F26B2A"/></svg><span>Insights</span><em>Week 42</em></button>
+      <button class="tile" data-go="body"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="#262626"/><path d="M20 7a13 13 0 0 1 11 19" fill="none" stroke="#2E8BA6" stroke-width="3" stroke-linecap="round"/><path d="M23 15a5 5 0 1 0 3 7 4 4 0 0 1-3-7z" fill="#fff"/></svg><span>Body</span><em id="tBody">7h 20m</em></button>
+      <button class="tile" data-go="money"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="none" stroke="#E6E6E3" stroke-width="3"/><path d="M20 7a13 13 0 1 1-12 8" fill="none" stroke="#262626" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="20" r="6" fill="url(#ember)"/></svg><span>Money</span><em id="tMoney">€1,240 left</em></button>
+      <button class="tile" data-go="people"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="none" stroke="#E6E6E3" stroke-width="1.2" stroke-dasharray="2 3"/><circle cx="20" cy="20" r="5" fill="#262626"/><circle cx="8" cy="15" r="3.5" fill="#F26B2A"/><circle cx="30" cy="11" r="3" fill="#2E8BA6"/><circle cx="29" cy="30" r="2.5" fill="#262626"/></svg><span>People</span><em id="tPeople">2 to reach</em></button>
+    </nav>
+  </section>
+
+  <!-- ============ TODAY ============ -->
+  <section class="screen" data-screen="today">
+    <div class="ghost">TODAY F.</div>
+    <div class="loc">
+      <div class="pin"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop" alt=""></div>
+      <div class="slip">Home · Bucharest<br><span class="meta">Wednesday, 14 October</span></div>
+    </div>
+    <div class="label-sm">HOW DO YOU FEEL</div>
+    <div class="dial-wrap">
+      <div class="disc" id="moodDisc">
+        <svg viewBox="0 0 200 200" class="ticks" id="ticks"></svg>
+        <button class="sphere" id="moodSphere" aria-label="Drag to set mood"></button>
+      </div>
+    </div>
+    <div class="readout">
+      <ul class="facts">
+        <li><svg><use href="#i-moon"/></svg> 7h 20m Sleep</li>
+        <li><svg class="tide"><use href="#i-drop"/></svg> 1.4 L Water</li>
+      </ul>
+      <div class="display" id="moodVal">72<small>°</small></div>
+    </div>
+    <div class="label-sm" style="margin-top:6px" id="moodWord">BRIGHT</div>
+    <div class="tiles stair forecast">
+      <div class="tile mini"><em>Mon, 12</em><i class="dot"></i><b>64°</b></div>
+      <div class="tile mini"><em>Tue, 13</em><svg class="rain" viewBox="0 0 40 40"><circle cx="20" cy="17" r="13" fill="url(#ember)"/><g stroke="#2E8BA6" stroke-width="2" stroke-linecap="round"><path d="M13 22v8M18 24v10M23 22v8M28 24v7"/></g></svg><b>58°</b></div>
+      <div class="tile mini"><em>Wed, 14</em><i class="dot"></i><b id="moodMini">72°</b></div>
+    </div>
+  </section>
+
+  <!-- ============ HABITS ============ -->
+  <section class="screen" data-screen="habits">
+    <div class="ghost">HABITS</div>
+    <header class="capsule">
+      <span class="cap-title">Daily rituals</span>
+      <span class="cap-sub">12-day streak · keep the flame</span>
+    </header>
+    <ul class="habit-list" id="habitList"></ul>
+    <button class="cap-btn ghost-btn" data-sheet="habit"><svg><use href="#i-plus"/></svg>New ritual</button>
+    <div class="eq-card tile">
+      <div class="meta">Last 21 days</div>
+      <div class="eq" id="eq"></div>
+    </div>
+  </section>
+
+  <!-- ============ FOCUS ============ -->
+  <section class="screen" data-screen="focus">
+    <div class="ghost">FOCUS</div>
+    <header class="capsule">
+      <span class="cap-title">Deep work</span>
+      <span class="cap-sub" id="focusTask">Write chapter outline (ev…</span>
+    </header>
+    <div class="track">
+      <span class="meta" id="tTime">00:00 · 25:00</span>
+      <div class="bar"><i id="tFill"></i><b id="tKnob"></b></div>
+    </div>
+    <div class="vinyl-wrap">
+      <div class="vinyl" id="vinyl"><div class="label"></div></div>
+      <div class="sleeve">
+        <div class="sleeve-art">
+          <span>F</span><span>O</span><span>C</span><span>U</span><span>S</span>
+          <span>M</span><span>O</span><span>D</span><span>E</span><span>·</span>
+        </div>
+        <div class="sleeve-tag">SIDE A — 25 MIN</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="sq" id="tReset" aria-label="Reset"><svg style="transform:scaleX(-1)"><use href="#i-skip"/></svg></button>
+      <button class="sq big" id="tPlay" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+      <button class="sq" id="tSkip" aria-label="Skip"><svg><use href="#i-skip"/></svg></button>
+    </div>
+    <div class="tile eq-mini"><div class="eq tall" id="eq2"></div></div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section class="screen" data-screen="plan">
+    <div class="ghost">PLAN</div>
+    <header class="capsule">
+      <span class="cap-micro">PLAN · TASKS</span>
+      <span class="cap-title">October , 2026</span>
+      <span class="cap-sub" id="planSub"></span>
+    </header>
+    <div class="seg" id="planSeg" role="tablist"><button class="on" data-v="day">Day<i></i></button><button data-v="upcoming">Upcoming<i></i></button><button data-v="someday">Someday<i></i></button></div>
+    <div class="wheel" id="wheel"></div>
+    <ul class="tasks" id="events"></ul>
+    <button class="cap-btn ghost-btn" data-sheet="event"><svg><use href="#i-plus"/></svg><span id="addLabel">Add to this day</span></button>
+  </section>
+
+  <!-- ============ JOURNAL ============ -->
+  <section class="screen" data-screen="journal">
+    <div class="ghost">JOURNAL</div>
+    <div class="j-head">
+      <div class="masked">
+        <div class="half"></div>
+        <div class="circle-img"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500&h=500&fit=crop" alt=""></div>
+        <div class="j-tag">ENTRY 212 <i class="dot sm"></i></div>
+      </div>
+      <div class="j-date"><span class="accent-track">October , 2026</span></div>
+    </div>
+    <div class="well"><textarea id="jInput" placeholder="One line about today…"></textarea>
+      <button class="cap-btn" id="jSave"><i class="dot sm"></i>Keep it</button></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- ============ BODY ============ -->
+  <section class="screen" data-screen="body">
+    <div class="ghost">BODY</div>
+    <header class="capsule">
+      <span class="cap-micro">SLEEP · MOVEMENT · WATER</span>
+      <span class="cap-title">Last night</span>
+    </header>
+    <div class="sleep-wrap">
+      <div class="sleep-dial">
+        <svg viewBox="0 0 200 200" id="sleepDial"></svg>
+        <div class="sleep-mid"><b id="sleepDur">7h 20m</b><em id="sleepSpan">23:40 → 07:00</em></div>
+      </div>
+      <div class="sleep-side">
+        <div class="mini-stat"><em>Deep</em><b>1h 52m</b></div>
+        <div class="mini-stat"><em>Resting HR</em><b>54 bpm</b></div>
+        <div class="mini-stat"><em>Score</em><b class="ember-t">86</b></div>
+      </div>
+    </div>
+    <div class="tiles stair body-tiles">
+      <div class="tile counter" data-k="water">
+        <svg class="tide-ic"><use href="#i-drop"/></svg>
+        <span><b id="waterV">1.4</b> / 2.0 L</span>
+        <div class="pm"><button data-d="-0.25" aria-label="Less water">−</button><button data-d="0.25" aria-label="More water">+</button></div>
+      </div>
+      <div class="tile counter">
+        <svg><use href="#i-step"/></svg>
+        <span><b id="stepsV">8,240</b> steps</span>
+        <div class="minibar"><i id="stepsBar"></i></div>
+      </div>
+      <div class="tile counter">
+        <svg class="ember-ic"><use href="#i-moon"/></svg>
+        <span><b>23:30</b> wind-down</span>
+        <em>in 9h 12m</em>
+      </div>
+    </div>
+    <div class="tile week-card">
+      <div class="meta">Active minutes · this week</div>
+      <div class="week-bars" id="weekBars"></div>
+    </div>
+    <button class="cap-btn ghost-btn" data-sheet="workout"><svg><use href="#i-plus"/></svg>Log movement</button>
+  </section>
+
+  <!-- ============ MONEY ============ -->
+  <section class="screen" data-screen="money">
+    <div class="ghost">MONEY</div>
+    <header class="capsule">
+      <span class="cap-micro">OCTOBER BUDGET</span>
+      <span class="cap-title" id="mLeft">€1,240 left</span>
+    </header>
+    <div class="coin-wrap">
+      <div class="coin-ring">
+        <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" class="cr-track"/><circle cx="100" cy="100" r="86" class="cr-fill" id="goalRing"/></svg>
+        <div class="coin"><span>€</span></div>
+      </div>
+      <div class="coin-txt">
+        <div class="meta">Goal · Lisbon in May</div>
+        <div class="display sm-d" id="goalV">€2,180</div>
+        <div class="meta" id="goalOf">of €3,000 · 73%</div>
+        <button class="cap-btn" id="addSave"><i class="dot sm"></i>Put away €50</button>
+      </div>
+    </div>
+    <div class="tiles stair cats" id="cats"></div>
+    <div class="g-label pad">UPCOMING</div>
+    <ol class="bills" id="bills"></ol>
+    <button class="cap-btn ghost-btn" data-sheet="expense"><svg><use href="#i-plus"/></svg>Add expense</button>
+  </section>
+
+  <!-- ============ PEOPLE ============ -->
+  <section class="screen" data-screen="people">
+    <div class="ghost">PEOPLE</div>
+    <header class="capsule">
+      <span class="cap-title">Your circle</span>
+      <span class="cap-sub" id="pplSub">2 people drifting</span>
+    </header>
+    <div class="orbit" id="orbit">
+      <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+      <div class="me"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop" alt="You"></div>
+    </div>
+    <div class="legend center-l"><span>closer = more recently in touch</span></div>
+    <ul class="ppl" id="ppl"></ul>
+    <div class="tile bday"><i class="dot sm"></i><p><b>Ana turns 34</b> on Sunday. A voice note counts.</p></div>
+  </section>
+
+  <!-- ============ INSIGHTS ============ -->
+  <section class="screen" data-screen="insights">
+    <div class="ghost">INSIGHTS</div>
+    <header class="capsule">
+      <span class="cap-micro">WEEKLY REPORT</span>
+      <span class="cap-title">Week 42 , 2026</span>
+    </header>
+    <div class="seg" role="tablist" id="seg"><button class="on" data-r="w">Week</button><button data-r="m">Month</button><button data-r="y">Year</button></div>
+    <div class="kpis">
+      <div class="tile kpi"><em>Avg. mood</em><b id="kMood">68°</b><span class="up" id="kMoodD">+6</span></div>
+      <div class="tile kpi"><em>Focus</em><b id="kFocus">9h 40m</b><span class="up" id="kFocusD">+1h 10m</span></div>
+      <div class="tile kpi"><em>Rituals</em><b id="kRit">74%</b><span class="down" id="kRitD">−4%</span></div>
+    </div>
+    <div class="tile chart-card">
+      <div class="meta">Mood vs. sleep</div>
+      <svg viewBox="0 0 260 120" class="chart" id="chart"></svg>
+      <div class="legend"><span><i style="background:#F26B2A"></i>Mood</span><span><i style="background:#2E8BA6"></i>Sleep</span></div>
+    </div>
+    <div class="tile note"><i class="dot sm"></i><p><b>Pattern:</b> after nights of 7h+ sleep, your mood runs 14° higher. Thursday is your weakest day.</p></div>
+  </section>
+
+  <!-- ============ INBOX ============ -->
+  <section class="screen" data-screen="inbox">
+    <div class="ghost">INBOX</div>
+    <header class="capsule">
+      <span class="cap-title">Nudges</span>
+      <span class="cap-sub" id="inboxSub">3 unread</span>
+    </header>
+    <button class="text-btn" id="markAll">Mark all as read</button>
+    <ul class="inbox" id="inbox"></ul>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section class="screen" data-screen="profile">
+    <div class="ghost">PROFILE</div>
+    <div class="p-head">
+      <div class="p-ring"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=240&h=240&fit=crop" alt=""></div>
+      <div><div class="p-name" id="pName">Max</div><div class="meta">Member since Mar 2026 · <span class="pro">PRO</span></div></div>
+    </div>
+    <div class="kpis small">
+      <div class="tile kpi"><b>212</b><em>days logged</em></div>
+      <div class="tile kpi"><b>12</b><em>day streak</em></div>
+      <div class="tile kpi"><b>86h</b><em>deep work</em></div>
+    </div>
+    <div class="group">
+      <div class="g-label">REMINDERS</div>
+      <label class="row"><span>Morning check-in<em>07:30</em></span><input type="checkbox" class="sw" checked data-pref="morning"></label>
+      <label class="row"><span>Evening journal<em>21:30</em></span><input type="checkbox" class="sw" checked data-pref="evening"></label>
+      <label class="row"><span>Focus breaks<em>every 25 min</em></span><input type="checkbox" class="sw" data-pref="breaks"></label>
+    </div>
+    <div class="group">
+      <div class="g-label">PREFERENCES</div>
+      <label class="row"><span>Haptics</span><input type="checkbox" class="sw" checked data-pref="haptic"></label>
+      <button class="row" id="exportBtn"><span>Export my data<em>JSON file</em></span><svg><use href="#i-chev"/></svg></button>
+      <button class="row" id="replayBtn"><span>Replay welcome</span><svg><use href="#i-chev"/></svg></button>
+      <button class="row danger" id="resetBtn"><span>Erase all data</span><svg><use href="#i-chev"/></svg></button>
+    </div>
+    <div class="meta center">SELF.OS v1.4 · Made with care</div>
+  </section>
+
+  <!-- ============ ONBOARDING ============ -->
+  <section class="onboard" id="onboard" aria-label="Welcome">
+    <div class="ghost">WELCOME</div>
+    <div class="ob-slides" id="obSlides">
+      <div class="ob-slide">
+        <div class="ob-art"><div class="disc ob-disc"><div class="sphere"></div></div></div>
+        <div class="ob-micro">01 / 03</div>
+        <h1>One instrument<br>for your days.</h1>
+        <p>Mood, rituals, focus, plans and a quiet journal, gathered in one calm place.</p>
+      </div>
+      <div class="ob-slide">
+        <div class="ob-art"><div class="ob-tiles"><span class="tile"></span><span class="tile"></span><span class="tile"><i class="dot"></i></span></div></div>
+        <div class="ob-micro">02 / 03</div>
+        <h1>Small rituals,<br>held lightly.</h1>
+        <p>Tap to complete. Miss a day and the streak bends, it doesn't break.</p>
+      </div>
+      <div class="ob-slide">
+        <div class="ob-art"><div class="vinyl ob-vinyl"><div class="label"></div></div></div>
+        <div class="ob-micro">03 / 03</div>
+        <h1>What should we<br>call you?</h1>
+        <div class="well"><input id="obName" placeholder="Your first name" maxlength="20" autocomplete="given-name"></div>
+      </div>
+    </div>
+    <div class="ob-foot">
+      <div class="ob-dots" id="obDots"><i class="on"></i><i></i><i></i></div>
+      <button class="cap-btn" id="obNext"><i class="dot sm"></i><span>Continue</span></button>
+    </div>
+    <button class="text-btn ob-skip" id="obSkip">Skip</button>
+  </section>
+
+  <!-- ============ SHEET + TOAST ============ -->
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-hidden="true"><div class="grip"></div><div id="sheetBody"></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- corner notch -->
+  <button class="notch" id="back" aria-label="Back"><svg><use href="#i-back"/></svg><span>BACK</span></button>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="app.js"></script>
+<script src="modules.js"></script>
+</body>
+</html>

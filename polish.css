@@ -1,0 +1,104 @@
+/* ===== Polish pass: distilled type, rhythm, interaction ===== */
+:root{
+  --t-xs:10px;--t-sm:12px;--t-md:14px;--t-lg:17px;--t-xl:22px;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;
+  --line:rgba(0,0,0,.06);
+  --sh-card:0 1px 2px rgba(0,0,0,.04),0 8px 20px -14px rgba(0,0,0,.18),0 0 0 1px var(--line);
+  --sh-hover:0 2px 4px rgba(0,0,0,.05),0 14px 28px -16px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.08);
+  --dur:.28s;
+}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}
+.display,.kpi b,.counter b,.mini-stat b,.cat b,.bill .n,.bill .amt,.tl .n,.wd b,#tTime,.sleep-mid b,#goalV,.p-name+div,.kpis.small b,.tile em,.meta{font-variant-numeric:tabular-nums}
+::selection{background:rgba(242,107,42,.22)}
+
+/* --- type scale: fewer sizes, clearer hierarchy --- */
+.meta,.tile em,.row em,.tmeta,.msg .meta{font-size:var(--t-xs);letter-spacing:.01em}
+.tile span,.habit .h-name,.tt,.msg p,.person .t,.row{font-size:var(--t-md)}
+.cap-title{font-size:var(--t-xl);letter-spacing:-.01em}
+.cap-sub{font-size:var(--t-sm);opacity:.62}
+.cap-micro,.g-label,.t-head,.field>span,.sh-micro,.ob-micro{font-size:9px;letter-spacing:.24em;font-weight:500}
+.label-sm{font-size:var(--t-xs);letter-spacing:.24em;color:var(--graphite);font-weight:500}
+
+/* --- surfaces: one radius family, one shadow family --- */
+.tile,.habit,.task,.msg,.person,.group,.slip,.ev{border-radius:var(--r-md);box-shadow:var(--sh-card)}
+.well,.field input,.field textarea{border-radius:var(--r-sm)}
+.sheet{border-radius:24px 24px 0 0}
+
+/* --- lists: straight edges read as professional; stair stays for tile grids only --- */
+.habit:nth-child(even),.task:nth-child(even),.msg:nth-child(even),.person:nth-child(even),.ev:nth-child(even){margin-left:0;margin-right:0}
+.habit-list,.tasks,.inbox,.ppl{gap:6px}
+.habit,.task,.person,.msg{padding:12px 14px;min-height:56px}
+
+/* --- tiles: equal height inside a row, aligned contents --- */
+.tiles{gap:10px}
+[data-screen="home"] .tile{min-height:108px;justify-content:flex-end;padding:12px 12px 11px;gap:2px}
+[data-screen="home"] .tile svg{width:28px;height:28px;margin-bottom:auto}
+[data-screen="home"] .tile span{font-weight:500;font-size:13px;margin-top:10px}
+.home-stat .meta{line-height:1.35}
+
+/* --- interaction: hover, press, focus --- */
+@media (hover:hover){
+  .tile:hover,.habit:hover,.task:hover,.msg:hover,.person:hover{box-shadow:var(--sh-hover);transform:translateY(-1px)}
+  .cap-btn:hover{filter:brightness(1.15)}
+  .ghost-btn:hover{box-shadow:var(--sh-hover);filter:none}
+  .sq:hover,.bell:hover,.pm button:hover,.chip:not(.on):hover,.quick button:hover{box-shadow:0 0 0 1px rgba(0,0,0,.14)}
+  .notch:hover{background:#111}
+  .del:hover,.x:hover,.sx:hover{color:var(--signal)}
+  .text-btn:hover{color:var(--ink)}
+  .wd:not(.sel):hover b{color:var(--ember)}
+}
+.tile,.habit,.task,.msg,.person,.cap-btn,.sq,.chip,.bell,.pm button{transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background-color var(--dur),filter var(--dur),opacity var(--dur)}
+.tile:active,.habit:active,.task:active,.msg:active,.person:active{transform:scale(.985)}
+.cap-btn:active,.sq:active,.chip:active,.pm button:active,.bell:active{transform:scale(.95)}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--ember);outline-offset:2px;border-radius:var(--r-sm)}
+.habit:focus-visible,.task:focus-visible,.msg:focus-visible{outline-offset:0}
+
+/* --- buttons: one primary shape, one secondary --- */
+.cap-btn{height:40px;padding:0 18px;font-size:13px;font-weight:500;letter-spacing:.01em;gap:8px}
+.ghost-btn{height:40px;box-shadow:0 0 0 1px rgba(0,0,0,.1);background:transparent;font-weight:500}
+.ghost-btn svg{width:13px;height:13px}
+.text-btn{font-size:var(--t-sm);text-decoration:none;color:var(--graphite);letter-spacing:0;font-weight:500}
+.del,.x,.sx{width:32px;height:32px;border-radius:50%}
+.touch,.pay{height:30px;padding:0 12px;font-size:11px;font-weight:500;letter-spacing:.02em;display:inline-flex;align-items:center}
+
+/* --- segmented control --- */
+.seg{padding:3px;box-shadow:0 0 0 1px var(--line);background:rgba(255,255,255,.7)}
+.seg button{font-size:var(--t-sm);font-weight:500;padding:7px 14px}
+
+/* --- capsule header: tighter, consistent offset --- */
+.capsule{padding:14px 26px 15px;gap:3px}
+
+/* --- sheet: sticky action bar, calmer fields --- */
+.sheet{padding-bottom:0}
+.sh-actions{position:sticky;bottom:0;background:linear-gradient(to top,var(--porcelain) 70%,rgba(244,244,242,0));margin:8px -24px 0;padding:18px 24px calc(env(safe-area-inset-bottom) + 18px)}
+.field{margin-bottom:16px}
+.field input,.field textarea{box-shadow:0 0 0 1px rgba(0,0,0,.09);background:#fff}
+.field input:focus,.field textarea:focus{box-shadow:0 0 0 1.5px var(--ink)}
+.field.err input{box-shadow:0 0 0 1.5px var(--signal)}
+.title-in:focus{border-bottom-color:var(--ink) !important}
+.scrim{background:rgba(20,20,20,.32);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.grip{width:36px;background:#cfcfcb}
+
+/* --- toast --- */
+.toast{font-size:var(--t-sm);padding:11px 16px 11px 18px;font-weight:400}
+
+/* --- tasks: refined density --- */
+.task{gap:12px}
+.tbody{gap:4px}
+.due{font-weight:500}
+.chev{opacity:.0;transition:opacity var(--dur)}
+@media (hover:hover){.task:hover .chev{opacity:1}}
+.t-head{padding:14px 2px 4px}
+
+/* --- habits --- */
+.check{width:22px;height:22px;box-shadow:inset 0 0 0 1.5px #cfcfcb}
+.habit .meta{color:var(--graphite)}
+
+/* --- wheel --- */
+.wd{padding:1px 6px;border-radius:var(--r-sm)}
+
+/* --- reduced motion --- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
