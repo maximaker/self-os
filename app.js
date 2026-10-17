@@ -168,7 +168,7 @@ function setMood(v) {
   $('#moodMini').textContent = mood + '°';
   $('#moodWord').textContent = WORDS.find(([t]) => mood < t)[1];
   const lit = Math.round(mood / 100 * 48);
-  $$('line', ticks).forEach((l, i) => l.setAttribute('stroke', i < lit ? '#F26B2A' : '#444'));
+  $$('line', ticks).forEach((l, i) => l.style.stroke = i < lit ? 'var(--ember)' : 'var(--disc-line)');
   $('#moodSphere').style.transform = `rotate(${mood * 3.6}deg)`;
   $('#moodSphere').style.filter = `saturate(${.5 + mood / 100}) brightness(${.85 + mood / 500})`;
   $('#moodDisc').setAttribute('aria-valuenow', mood);
@@ -227,8 +227,8 @@ const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')
 const parse = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
 const dayDiff = s => Math.round((parse(s) - TODAY) / 864e5);
 const shortDate = s => { const n = dayDiff(s); return n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : n === -1 ? 'Yesterday' : n > 1 && n < 7 ? DOW[parse(s).getDay()].replace('.', '') : parse(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
-const TAGS = [['Health', '#2E8BA6'], ['Work', '#262626'], ['Home', '#F26B2A'], ['Social', '#E63B2E']];
-const tagColor = t => (TAGS.find(x => x[0] === t) || [, '#6B6B6B'])[1];
+const TAGS = [['Health', 'var(--tide)'], ['Work', 'var(--ink)'], ['Home', 'var(--ember)'], ['Social', 'var(--signal)']];
+const tagColor = t => (TAGS.find(x => x[0] === t) || [, 'var(--graphite)'])[1];
 const PRI = ['Low', 'Normal', 'High'];
 let uid = Date.now();
 let tasks = store.get('tasks', [
@@ -371,11 +371,11 @@ function drawChart(r) {
   const my = v => 96 - (v - 40) / 45 * 80, sy = v => 96 - (v - 5) / 3.5 * 80;
   const line = (arr, f) => arr.map((v, i) => `${i ? 'L' : 'M'}${px(i).toFixed(1)} ${f(v).toFixed(1)}`).join(' ');
   $('#chart').innerHTML = `
-    ${[20, 48, 76].map(y => `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke="#E6E6E3" stroke-width="1"/>`).join('')}
-    ${d.sleep.map((v, i) => `<rect x="${px(i) - 3}" y="${sy(v)}" width="6" height="${100 - sy(v)}" rx="3" fill="#2E8BA6" opacity=".85"/>`).join('')}
-    <path d="${line(d.mood, my)}" fill="none" stroke="#F26B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mline"/>
-    ${d.mood.map((v, i) => `<circle cx="${px(i)}" cy="${my(v)}" r="${i === n - 1 ? 5 : 2.5}" fill="${i === n - 1 ? '#F26B2A' : '#fff'}" stroke="#F26B2A" stroke-width="1.5"/>`).join('')}
-    ${d.x.map((t, i) => `<text x="${px(i)}" y="116" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="Roboto">${t}</text>`).join('')}`;
+    ${[20, 48, 76].map(y => `<line x1="0" x2="${W}" y1="${y}" y2="${y}" stroke-width="1" style="stroke:var(--fog)"/>`).join('')}
+    ${d.sleep.map((v, i) => `<rect x="${px(i) - 3}" y="${sy(v)}" width="6" height="${100 - sy(v)}" rx="3" opacity=".85" style="fill:var(--tide)"/>`).join('')}
+    <path d="${line(d.mood, my)}" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mline" style="stroke:var(--ember)"/>
+    ${d.mood.map((v, i) => `<circle cx="${px(i)}" cy="${my(v)}" r="${i === n - 1 ? 5 : 2.5}" stroke-width="1.5" style="stroke:var(--ember);fill:${i === n - 1 ? 'var(--ember)' : 'var(--paper)'}"/>`).join('')}
+    ${d.x.map((t, i) => `<text x="${px(i)}" y="116" text-anchor="middle" font-size="8" font-family="Roboto" style="fill:var(--graphite)">${t}</text>`).join('')}`;
   const [a, b, c, e, f, g] = d.k;
   $('#kMood').textContent = a; $('#kMoodD').textContent = b; $('#kFocus').textContent = c; $('#kFocusD').textContent = e; $('#kRit').textContent = f; $('#kRitD').textContent = g;
   $('#kRitD').className = g.startsWith('−') ? 'down' : 'up';
@@ -528,6 +528,20 @@ $('#obName').addEventListener('keydown', e => e.key === 'Enter' && endOnboarding
 (() => { let x0 = null; const el = $('#onboard');
   el.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
   el.addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - x0; if (d < -50 && ob < 2) obGo(ob + 1); if (d > 50 && ob > 0) obGo(ob - 1); }); })();
+
+/* ---------- appearance ---------- */
+function renderTheme() {
+  const m = SelfTheme.mode(), i = SelfTheme.info();
+  $$('#themeSeg button').forEach(b => { b.classList.toggle('on', b.dataset.m === m); b.setAttribute('aria-checked', b.dataset.m === m); });
+  $('#themeNote').innerHTML = m === 'auto'
+    ? `Yoru from ${i.set} until ${i.rise}.${i.guessed ? ' <button id="locBtn">Use my location</button> for exact sunset.' : ''}`
+    : m === 'dark' ? 'Always dark. Easy on the eyes at night.' : 'Always light. Paper in every hour.';
+  $('#locBtn')?.addEventListener('click', () => SelfTheme.locate().then(() => { renderTheme(); toast('Sunset set for your location'); }).catch(() => toast('Location unavailable')));
+}
+$('#themeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; SelfTheme.set(b.dataset.m); renderTheme(); buzz(); });
+addEventListener('themechange', renderTheme);
+renderTheme();
+document.addEventListener('keydown', e => { if (e.key.toLowerCase() === 'g' && !e.target.closest('input,textarea')) document.documentElement.classList.toggle('show-grid'); });
 
 /* ---------- enter hooks & boot ---------- */
 const onEnter = {

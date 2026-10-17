@@ -1,0 +1,120 @@
+/* ===================================================================
+   Japanese palette — washi by day, yoru after sunset
+   kinari (unbleached silk) · sumi (ink) · shu (vermilion) · ai (indigo) · beni (crimson)
+   =================================================================== */
+:root,:root[data-theme="light"]{
+  --porcelain:#F1ECE2;   /* kinari washi surface */
+  --paper:#FBF8F2;       /* raised paper */
+  --fog:#E3DCCD;         /* hairlines, tracks */
+  --mute:#BCB2A0;        /* quiet glyphs */
+  --ink:#24211E;         /* sumi text */
+  --graphite:#6F685D;    /* secondary text */
+  --block:#24211E;       /* sumi blocks: capsules, notch, primary buttons */
+  --on-block:#FBF8F2;
+  --ember:#C9472F;       /* shu vermilion */
+  --e1:#E8806A;--e2:#CF5536;--e3:#9F3320;
+  --signal:#B4232F;      /* beni crimson */
+  --tide:#2C4A72;        /* ai indigo */
+  --sky:#A8B9D1;
+  --disc-hi:#3B3733;--disc-mid:#2A2724;--disc-lo:#1B1917;--disc-line:#4A4540;
+  --ghost:#FBF8F2;
+  --line:rgba(36,33,30,.08);
+  --sh-card:0 1px 2px rgba(36,33,30,.04),0 8px 20px -14px rgba(36,33,30,.22),0 0 0 1px var(--line);
+  --sh-hover:0 2px 4px rgba(36,33,30,.05),0 14px 28px -16px rgba(36,33,30,.26),0 0 0 1px rgba(36,33,30,.12);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --porcelain:#121316;   /* yoru, night */
+  --paper:#1B1C20;
+  --fog:#2A2B30;
+  --mute:#4C4D53;
+  --ink:#ECE6DA;
+  --graphite:#9E988C;
+  --block:#E9E2D4;       /* blocks invert to pale kinari */
+  --on-block:#141518;
+  --ember:#E2694A;
+  --e1:#F29A80;--e2:#E2694A;--e3:#B4472D;
+  --signal:#E25660;
+  --tide:#8CA8D3;
+  --sky:#3E5577;
+  --disc-hi:#2A2B31;--disc-mid:#1D1E22;--disc-lo:#0C0D0F;--disc-line:#3B3C42;
+  --ghost:#1A1B1F;
+  --line:rgba(255,255,255,.07);
+  --sh-card:0 0 0 1px var(--line),0 10px 24px -16px rgba(0,0,0,.7);
+  --sh-hover:0 0 0 1px rgba(255,255,255,.12),0 16px 30px -16px rgba(0,0,0,.8);
+  --sh-raise:0 0 0 1px var(--line);
+  --sh-in:inset 0 0 0 1px var(--line);
+  color-scheme:dark;
+}
+html.theme-anim,html.theme-anim *{transition:background-color .6s ease,color .6s ease,border-color .6s ease,box-shadow .6s ease,fill .6s ease,stroke .6s ease !important}
+
+body{background:var(--porcelain);color:var(--ink)}
+@media (min-width:481px){body{background:radial-gradient(120% 90% at 30% 10%,var(--paper),var(--fog))}}
+.ghost{color:var(--ghost);text-shadow:none}
+::selection{background:color-mix(in srgb,var(--ember) 25%,transparent)}
+.grain{opacity:.9}
+:root[data-theme="dark"] .grain{opacity:.35;mix-blend-mode:screen}
+
+/* white glyphs sitting on vermilion / crimson stay white in both themes */
+.badge,.due.today,.due.late,.wd.sel b,.coin,.done-art .sphere,.sw:checked::after,.task.done .tcheck::after{color:#fff}
+.task.done .tcheck::after,.sub.done .tcheck::after{border-color:#fff}
+/* dark objects (discs, record) need an edge at night */
+:root[data-theme="dark"] .ring-disc,:root[data-theme="dark"] .disc,:root[data-theme="dark"] .sleep-dial,:root[data-theme="dark"] .vinyl{box-shadow:0 0 0 1px var(--line),0 14px 28px -16px rgba(0,0,0,.8)}
+:root[data-theme="dark"] .device{box-shadow:0 0 0 10px #1a1b1f,0 0 0 11px #2a2b30,40px 60px 80px -30px rgba(0,0,0,.7)}
+:root[data-theme="dark"] .sleeve{background:var(--disc-mid);box-shadow:inset 0 6px 0 var(--tide),0 0 0 1px var(--line)}
+:root[data-theme="dark"] .sleeve-tag{color:var(--on-block)}
+:root[data-theme="dark"] .scrim{background:rgba(0,0,0,.55)}
+:root[data-theme="dark"] img{filter:brightness(.92)}
+
+/* ===================================================================
+   Grid system
+   6 columns inside a fixed content frame; 12px gutter; 8px vertical rhythm.
+   Everything starts on column 1 and ends on column 6 — no ragged offsets.
+   =================================================================== */
+:root{--pl:92px;--pr:28px;--gut:12px;--rhythm:8px}
+@media (max-width:480px){:root{--pl:60px;--pr:20px}}
+@media (max-width:360px){:root{--pl:52px;--pr:16px;--gut:10px}}
+.screen,.screen[data-screen]{padding-left:var(--pl);padding-right:var(--pr);gap:calc(var(--rhythm) * 3)}
+.onboard{padding-left:var(--pl);padding-right:var(--pr)}
+
+/* headers & top rows sit on the frame edge (no negative bleed) */
+.capsule,.topbar,.offline,.p-head{margin-left:0;max-width:100%}
+.topbar{margin-top:calc(var(--rhythm) * -2);margin-right:0}
+.capsule{align-self:stretch;min-width:0}
+.j-head{margin-left:0}
+.j-head .half{left:calc(var(--pl) * -1);width:calc(var(--pl) + 200px)}
+
+/* 3-up module rows: columns 1–2, 3–4, 5–6 */
+.tiles,.kpis,.kpis.small{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);align-items:stretch}
+.stair .tile:nth-child(n),.kpis .kpi:nth-child(n),.ob-tiles .tile:nth-child(n){margin-top:0}
+.tiles>.tile,.kpis>.kpi{height:100%}
+
+/* 2-up feature rows: hero object on columns 1–3, readout on 4–6 */
+.home-hero,.sleep-wrap,.coin-wrap,.readout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut);align-items:center}
+.ring-disc,.sleep-dial,.coin-ring{justify-self:start}
+
+/* full-width blocks span all 6 columns */
+.eq-card,.eq-mini,.week-card,.chart-card,.note,.bday,.group,.well,.timeline,.tasks,.habit-list,.inbox,.ppl,.bills{align-self:stretch;width:auto}
+.eq-mini{padding:12px 14px}
+
+/* focus controls aligned on one line */
+.controls{justify-content:start;grid-template-columns:repeat(3,auto);gap:var(--gut);align-items:center}
+.controls .sq:first-child,.controls .sq:last-child{margin-top:0}
+.vinyl-wrap{align-self:stretch}
+.track{align-items:flex-start}
+.track .bar{width:100%}
+
+/* secondary buttons & segmented controls start on column 1 */
+.ghost-btn,.seg{align-self:flex-start}
+
+/* section labels align with the first column */
+.g-label.pad,.label-sm{align-self:flex-start}
+
+/* grid overlay for review: press G */
+html.show-grid .screen.is-active::before{content:"";position:absolute;z-index:30;pointer-events:none;top:0;bottom:0;left:var(--pl);right:var(--pr);
+  background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--ember) 9%,transparent) 0 calc((100% - 5 * var(--gut)) / 6),transparent calc((100% - 5 * var(--gut)) / 6) calc((100% - 5 * var(--gut)) / 6 + var(--gut)))}
+
+/* appearance control */
+.theme-seg{margin:4px 0 2px}
+.theme-note{font-size:var(--t-xs);color:var(--graphite);padding:0 0 12px;line-height:1.45}
+.theme-note button{color:var(--ember);font-weight:500}

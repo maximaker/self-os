@@ -42,7 +42,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
   .cap-btn:hover{filter:brightness(1.15)}
   .ghost-btn:hover{box-shadow:var(--sh-hover);filter:none}
   .sq:hover,.bell:hover,.pm button:hover,.chip:not(.on):hover,.quick button:hover{box-shadow:0 0 0 1px rgba(0,0,0,.14)}
-  .notch:hover{background:#111}
+  .notch:hover{background:var(--disc-lo)}
   .del:hover,.x:hover,.sx:hover{color:var(--signal)}
   .text-btn:hover{color:var(--ink)}
   .wd:not(.sel):hover b{color:var(--ember)}
@@ -73,12 +73,12 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .sheet{padding-bottom:0}
 .sh-actions{position:sticky;bottom:0;background:linear-gradient(to top,var(--porcelain) 70%,rgba(244,244,242,0));margin:8px -24px 0;padding:18px 24px calc(env(safe-area-inset-bottom) + 18px)}
 .field{margin-bottom:16px}
-.field input,.field textarea{box-shadow:0 0 0 1px rgba(0,0,0,.09);background:#fff}
+.field input,.field textarea{box-shadow:0 0 0 1px rgba(0,0,0,.09);background:var(--paper)}
 .field input:focus,.field textarea:focus{box-shadow:0 0 0 1.5px var(--ink)}
 .field.err input{box-shadow:0 0 0 1.5px var(--signal)}
 .title-in:focus{border-bottom-color:var(--ink) !important}
 .scrim{background:rgba(20,20,20,.32);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-.grip{width:36px;background:#cfcfcb}
+.grip{width:36px;background:var(--mute)}
 
 /* --- toast --- */
 .toast{font-size:var(--t-sm);padding:11px 16px 11px 18px;font-weight:400}
@@ -92,7 +92,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 .t-head{padding:14px 2px 4px}
 
 /* --- habits --- */
-.check{width:22px;height:22px;box-shadow:inset 0 0 0 1.5px #cfcfcb}
+.check{width:22px;height:22px;box-shadow:inset 0 0 0 1.5px var(--mute)}
 .habit .meta{color:var(--graphite)}
 
 /* --- wheel --- */

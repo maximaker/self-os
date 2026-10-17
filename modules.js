@@ -10,12 +10,12 @@ function drawSleep() {
   const span = (SLEEP.to + 24 - SLEEP.from);
   const ticks = Array.from({ length: 24 }, (_, h) => {
     const a = (h / 24) * Math.PI * 2 - Math.PI / 2, r2 = h % 6 ? 92 : 88;
-    return `<line x1="${c + 95 * Math.cos(a)}" y1="${c + 95 * Math.sin(a)}" x2="${c + r2 * Math.cos(a)}" y2="${c + r2 * Math.sin(a)}" stroke="#555" stroke-width="1.2" stroke-linecap="round"/>`;
+    return `<line x1="${c + 95 * Math.cos(a)}" y1="${c + 95 * Math.sin(a)}" x2="${c + r2 * Math.cos(a)}" y2="${c + r2 * Math.sin(a)}" stroke-width="1.2" stroke-linecap="round" style="stroke:var(--disc-line)"/>`;
   }).join('');
-  const lbl = [[0, '00'], [6, '06'], [12, '12'], [18, '18']].map(([h, t]) => { const a = (h / 24) * Math.PI * 2 - Math.PI / 2; return `<text x="${c + 70 * Math.cos(a)}" y="${c + 70 * Math.sin(a) + 3}" text-anchor="middle" font-size="8" fill="#777" font-family="Roboto">${t}</text>`; }).join('');
-  svg.innerHTML = `${ticks}${lbl}<circle cx="${c}" cy="${c}" r="${R}" fill="none" stroke="#333" stroke-width="7"/>
-    <path id="sleepArc" d="M${x1} ${y1} A${R} ${R} 0 ${span > 12 ? 1 : 0} 1 ${x2} ${y2}" fill="none" stroke="#2E8BA6" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="${x1}" cy="${y1}" r="6" fill="#262626" stroke="#2E8BA6" stroke-width="2"/>
+  const lbl = [[0, '00'], [6, '06'], [12, '12'], [18, '18']].map(([h, t]) => { const a = (h / 24) * Math.PI * 2 - Math.PI / 2; return `<text x="${c + 70 * Math.cos(a)}" y="${c + 70 * Math.sin(a) + 3}" text-anchor="middle" font-size="8" font-family="Roboto" style="fill:var(--graphite)">${t}</text>`; }).join('');
+  svg.innerHTML = `${ticks}${lbl}<circle cx="${c}" cy="${c}" r="${R}" fill="none" stroke-width="7" style="stroke:var(--disc-mid)"/>
+    <path id="sleepArc" d="M${x1} ${y1} A${R} ${R} 0 ${span > 12 ? 1 : 0} 1 ${x2} ${y2}" fill="none" style="stroke:var(--tide)" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="${x1}" cy="${y1}" r="6" stroke-width="2" style="fill:var(--ink);stroke:var(--tide)"/>
     <circle cx="${x2}" cy="${y2}" r="7" fill="url(#ember)"/>`;
   const p = $('#sleepArc'); if (G) { const L = p.getTotalLength(); G.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.out' }); }
 }
