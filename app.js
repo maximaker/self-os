@@ -541,7 +541,6 @@ function renderTheme() {
 $('#themeSeg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; SelfTheme.set(b.dataset.m); renderTheme(); buzz(); });
 addEventListener('themechange', renderTheme);
 renderTheme();
-document.addEventListener('keydown', e => { if (e.key.toLowerCase() === 'g' && !e.target.closest('input,textarea')) document.documentElement.classList.toggle('show-grid'); });
 
 /* ---------- enter hooks & boot ---------- */
 const onEnter = {
